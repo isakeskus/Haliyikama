@@ -20,7 +20,7 @@ export default function ContactPage() {
               <Phone size={28} />
             </div>
             <div>
-              <h3 className="text-xl font-bold mb-1">Telefon / WhatsApp</h3>
+              <h3 className="text-xl font-bold mb-1">Telefon</h3>
               <p className="text-foreground/70 mb-2">Hızlı randevu ve teklif için arayın.</p>
               <a href="tel:+905523135463" className="text-xl font-semibold hover:text-turquoise transition-colors block">0552 313 54 63</a>
             </div>

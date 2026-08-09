@@ -13,14 +13,6 @@ export function Footer() {
           <p className="text-white/80 mb-6">
             Bursa'nın her noktasına aynı gün yerinde profesyonel koltuk, yatak ve araç koltuğu temizliği hizmeti sunuyoruz.
           </p>
-          {/* <div className="flex space-x-4">
-            <a href="#" className="px-4 py-2 bg-white/10 rounded-full hover:bg-turquoise transition-colors font-medium">
-              Instagram
-            </a>
-            <a href="#" className="px-4 py-2 bg-white/10 rounded-full hover:bg-turquoise transition-colors font-medium">
-              Facebook
-            </a>
-          </div> */}
         </div>
 
         {/* Contact Info */}
@@ -31,7 +23,6 @@ export function Footer() {
               <Phone className="text-turquoise shrink-0 mt-1" size={20} />
               <div>
                 <a href="tel:+905523135463" className="hover:text-turquoise transition-colors block">0552 313 54 63</a>
-                <a href="https://wa.me/905523135463" className="hover:text-turquoise transition-colors block text-sm">WhatsApp Destek Hattı</a>
               </div>
             </li>
             <li className="flex items-start space-x-3">

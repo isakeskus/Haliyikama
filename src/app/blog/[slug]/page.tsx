@@ -68,9 +68,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
           <div className="bg-navy rounded-2xl p-6 text-center text-white">
             <h3 className="text-xl font-bold mb-2">Koltuklarınız Profesyonel Ellere Emanet!</h3>
             <p className="text-white/80 mb-6">Bursa'nın tüm ilçelerine aynı gün ücretsiz servis imkanı.</p>
-            <Button variant="whatsapp" size="lg" className="gap-2" asChild>
-              <a href="https://wa.me/905523135463" target="_blank" rel="noopener noreferrer">
-                <MessageCircle size={20} /> Hemen Fiyat Al
+            <Button size="lg" className="gap-2" asChild>
+              <a href="tel:+905523135463">
+                <Phone size={20} /> Hemen Fiyat Al
               </a>
             </Button>
           </div>

@@ -68,11 +68,6 @@ function HeroSection() {
                 <Phone size={24} /> Hemen Ara
               </a>
             </Button>
-            <Button variant="whatsapp" size="lg" className="text-lg gap-2" asChild>
-              <a href="https://wa.me/905523135463" target="_blank" rel="noopener noreferrer">
-                <MessageCircle size={24} /> WhatsApp Teklif Al
-              </a>
-            </Button>
           </div>
         </motion.div>
         
@@ -170,7 +165,7 @@ function ServicesSection() {
 
 function StepsSection() {
   const steps = [
-    { num: "1", title: "Randevu Al", desc: "Bizi arayın veya WhatsApp'tan yazın." },
+    { num: "1", title: "Randevu Al", desc: "Bizi arayarak randevu oluşturun." },
     { num: "2", title: "Ekibimiz Gelsin", desc: "Belirlenen saatte adresinizdeyiz." },
     { num: "3", title: "Profesyonel Temizlik", desc: "Derinlemesine buharlı yıkama işlemi." },
     { num: "4", title: "Mis Gibi Teslim", desc: "Tertemiz koltuklarınızı hemen kullanın." },
@@ -246,13 +241,13 @@ function QuoteFormSection() {
           
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy dark:text-white mb-6">Hemen Fiyat Teklifi Alın</h2>
           <p className="text-foreground/70 text-lg mb-8 max-w-2xl mx-auto">
-            Hizmetlerimiz hakkında detaylı bilgi ve evinize özel fiyat teklifi almak için bize WhatsApp üzerinden saniyeler içinde ulaşabilirsiniz.
+            Hizmetlerimiz hakkında detaylı bilgi ve evinize özel fiyat teklifi almak için bizi saniyeler içinde arayabilirsiniz.
           </p>
           
-          <Button variant="whatsapp" size="lg" className="text-xl h-16 px-8 rounded-full shadow-[0_0_40px_rgba(37,211,102,0.4)] hover:shadow-[0_0_60px_rgba(37,211,102,0.6)]" asChild>
-            <a href="https://wa.me/905523135463" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-              <MessageCircle size={32} />
-              WhatsApp'tan Teklif Al
+          <Button size="lg" className="text-xl h-16 px-8 rounded-full shadow-[0_0_40px_rgba(0,184,217,0.4)] hover:shadow-[0_0_60px_rgba(0,184,217,0.6)] gap-3" asChild>
+            <a href="tel:+905523135463" className="flex items-center gap-3">
+              <Phone size={32} />
+              Şimdi Bizi Arayın
             </a>
           </Button>
         </div>

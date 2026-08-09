@@ -35,7 +35,6 @@ export const metadata: Metadata = {
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 import { JsonLd } from "@/components/json-ld";
 
 export default function RootLayout({
@@ -84,7 +83,6 @@ export default function RootLayout({
           <Navbar />
           <main className="flex-grow">{children}</main>
           <Footer />
-          <FloatingWhatsApp />
         </ThemeProvider>
       </body>
     </html>
