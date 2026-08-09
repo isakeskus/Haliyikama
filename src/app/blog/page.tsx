@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { BookOpen } from "lucide-react";
 
@@ -28,8 +29,13 @@ export default function BlogPage() {
         {blogPosts.map((post) => (
           <Link href={`/blog/${post.slug}`} key={post.slug} className="group block">
             <Card className="h-full group-hover:border-turquoise/50 transition-colors">
-              <div className="h-48 bg-gradient-to-br from-turquoise/20 to-navy/20 rounded-t-3xl flex items-center justify-center text-navy dark:text-white">
-                <BookOpen size={48} className="opacity-50" />
+              <div className="h-48 relative rounded-t-3xl overflow-hidden border-b border-foreground/10">
+                <Image 
+                  src="/images/detail.jpg" 
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
               </div>
               <CardHeader>
                 <CardTitle className="text-2xl group-hover:text-turquoise transition-colors">{post.title}</CardTitle>
