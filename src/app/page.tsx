@@ -43,7 +43,7 @@ const faqs = [
 
 function HeroSection() {
   return (
-    <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+    <section className="relative pt-28 pb-16 lg:pt-40 lg:pb-32 overflow-hidden">
       {/* Background Gradients */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl opacity-30 dark:opacity-20 pointer-events-none -z-10">
         <div className="absolute top-0 left-0 w-96 h-96 bg-turquoise rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" />
@@ -56,7 +56,7 @@ function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <h1 className="text-5xl lg:text-7xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6">
             Bursa'nın Profesyonel <br/><span className="text-turquoise">Koltuk Yıkama</span> Hizmeti
           </h1>
           <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-lg">
@@ -80,7 +80,7 @@ function HeroSection() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="relative h-[400px] lg:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl glass border border-white/30"
+          className="relative h-[300px] md:h-[400px] lg:h-[600px] w-full rounded-3xl overflow-hidden shadow-2xl glass border border-white/30"
         >
           <Image 
             src="/images/hero.jpg" 
@@ -129,10 +129,10 @@ function TrustSection() {
 
 function ServicesSection() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <h2 className="text-4xl font-bold mb-4">Hizmetlerimiz</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">Hizmetlerimiz</h2>
           <p className="text-foreground/70 text-lg">Evinizin veya iş yerinizin ihtiyacı olan tüm tekstil yüzeyler için profesyonel çözümler.</p>
         </div>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -177,9 +177,9 @@ function StepsSection() {
   ];
 
   return (
-    <section className="py-24 bg-slate-50 dark:bg-slate-900/50">
+    <section className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16">Nasıl Çalışıyoruz?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Nasıl Çalışıyoruz?</h2>
         <div className="grid md:grid-cols-4 gap-8 relative">
           {/* Connector Line */}
           <div className="hidden md:block absolute top-12 left-1/8 right-1/8 h-1 bg-turquoise/20 -z-10" />
@@ -208,9 +208,9 @@ function StepsSection() {
 
 function WhyUsSection() {
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-16">Neden Bizi Seçmelisiniz?</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Neden Bizi Seçmelisiniz?</h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {whyUs.map((feature, idx) => (
             <motion.div
@@ -235,7 +235,7 @@ function WhyUsSection() {
 
 function QuoteFormSection() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-navy -z-20" />
       <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 -z-10" />
       
@@ -244,7 +244,7 @@ function QuoteFormSection() {
           {/* Decorative glow */}
           <div className="absolute -top-24 -right-24 w-48 h-48 bg-turquoise rounded-full blur-3xl opacity-20 pointer-events-none" />
           
-          <h2 className="text-3xl lg:text-4xl font-bold text-navy dark:text-white mb-6">Hemen Fiyat Teklifi Alın</h2>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-navy dark:text-white mb-6">Hemen Fiyat Teklifi Alın</h2>
           <p className="text-foreground/70 text-lg mb-8 max-w-2xl mx-auto">
             Hizmetlerimiz hakkında detaylı bilgi ve evinize özel fiyat teklifi almak için bize WhatsApp üzerinden saniyeler içinde ulaşabilirsiniz.
           </p>
@@ -265,9 +265,9 @@ function FAQSection() {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section className="py-24 bg-background">
+    <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 max-w-3xl">
-        <h2 className="text-4xl font-bold text-center mb-12">Sık Sorulan Sorular</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Sık Sorulan Sorular</h2>
         <div className="space-y-4">
           {faqs.map((faq, idx) => (
             <div key={idx} className="border border-foreground/10 rounded-2xl overflow-hidden bg-white/50 dark:bg-navy/10">
@@ -295,6 +295,32 @@ function FAQSection() {
   );
 }
 
+
+
+function ServiceAreasSection() {
+  const districts = ["Nilüfer", "Osmangazi", "Yıldırım", "İnegöl", "Gemlik", "Mudanya"];
+  return (
+    <section className="py-16 bg-slate-50 dark:bg-slate-900/50">
+      <div className="container mx-auto px-4 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">Hizmet Bölgelerimiz</h2>
+        <p className="text-foreground/70 max-w-2xl mx-auto mb-8">
+          Bursa'nın tüm ilçelerine gezici servisimiz ile profesyonel yerinde koltuk ve yatak yıkama hizmeti sunuyoruz.
+        </p>
+        <div className="flex flex-wrap justify-center gap-3">
+          {districts.map(d => (
+            <span key={d} className="px-4 py-2 rounded-full border border-turquoise/30 bg-turquoise/5 text-turquoise font-medium text-sm md:text-base">
+              {d} Koltuk Yıkama
+            </span>
+          ))}
+          <span className="px-4 py-2 rounded-full border border-foreground/10 bg-background font-medium text-sm md:text-base">
+            + Bursa'nın Diğer Tüm İlçeleri
+          </span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -305,6 +331,7 @@ export default function Home() {
       <WhyUsSection />
       <QuoteFormSection />
       <FAQSection />
+      <ServiceAreasSection />
       
       {/* Mobile Sticky CTA */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-md border-t border-foreground/10 z-40">

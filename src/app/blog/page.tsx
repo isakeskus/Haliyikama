@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { BookOpen } from "lucide-react";
 
 export const metadata = {
   title: "Blog & Faydalı Bilgiler",
@@ -27,8 +28,8 @@ export default function BlogPage() {
         {blogPosts.map((post) => (
           <Link href={`/blog/${post.slug}`} key={post.slug} className="group block">
             <Card className="h-full group-hover:border-turquoise/50 transition-colors">
-              <div className="h-48 bg-foreground/5 rounded-t-3xl flex items-center justify-center text-foreground/40 font-medium">
-                Görsel Yer Tutucu
+              <div className="h-48 bg-gradient-to-br from-turquoise/20 to-navy/20 rounded-t-3xl flex items-center justify-center text-navy dark:text-white">
+                <BookOpen size={48} className="opacity-50" />
               </div>
               <CardHeader>
                 <CardTitle className="text-2xl group-hover:text-turquoise transition-colors">{post.title}</CardTitle>
