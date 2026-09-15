@@ -1,7 +1,13 @@
-"use client";
+import { Metadata } from "next";
+import { Phone, MapPin, MessageCircle, Clock } from "lucide-react";
+import { ContactForm } from "@/components/contact-form";
+import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/services";
 
-import { Phone, MapPin, Mail, Clock } from "lucide-react";
-import { Button } from "@/components/ui/button";
+export const metadata: Metadata = {
+  title: "İletişim",
+  description: "Bursa Koltuk Yıkama ile iletişime geçin. Telefon veya WhatsApp üzerinden hemen randevu alın, Bursa'nın tüm ilçelerine aynı gün hizmet veriyoruz.",
+  alternates: { canonical: "/iletisim" },
+};
 
 export default function ContactPage() {
   return (
@@ -22,10 +28,21 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-bold mb-1">Telefon</h3>
               <p className="text-foreground/70 mb-2">Hızlı randevu ve teklif için arayın.</p>
-              <a href="tel:+905523135463" className="text-xl font-semibold hover:text-turquoise transition-colors block">0552 313 54 63</a>
+              <a href={`tel:${PHONE_TEL}`} className="text-xl font-semibold hover:text-turquoise transition-colors block">{PHONE_DISPLAY}</a>
             </div>
           </div>
-          
+
+          <div className="flex items-start gap-4">
+            <div className="p-4 bg-turquoise/10 rounded-2xl text-turquoise">
+              <MessageCircle size={28} />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-1">WhatsApp</h3>
+              <p className="text-foreground/70 mb-2">Yazışarak hızlıca fiyat teklifi alın.</p>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-xl font-semibold hover:text-turquoise transition-colors block">WhatsApp&apos;tan Yazın</a>
+            </div>
+          </div>
+
           <div className="flex items-start gap-4">
             <div className="p-4 bg-turquoise/10 rounded-2xl text-turquoise">
               <MapPin size={28} />
@@ -33,7 +50,7 @@ export default function ContactPage() {
             <div>
               <h3 className="text-xl font-bold mb-1">Merkez Ofis</h3>
               <p className="text-foreground/70">Ahmet Paşa mahallesi fevziçakmak caddesi 47 numara, Bursa</p>
-              <p className="text-sm text-foreground/50 mt-1">*Bursa'nın tüm ilçelerine gezici servis ağımız mevcuttur.</p>
+              <p className="text-sm text-foreground/50 mt-1">*Bursa&apos;nın tüm ilçelerine gezici servis ağımız mevcuttur.</p>
             </div>
           </div>
 
@@ -48,24 +65,7 @@ export default function ContactPage() {
           </div>
         </div>
 
-        <div className="glass-card p-8 rounded-3xl">
-          <h2 className="text-2xl font-bold mb-6">Bize Mesaj Gönderin</h2>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div>
-              <label className="text-sm font-semibold ml-1">Adınız Soyadınız</label>
-              <input type="text" className="w-full h-12 px-4 mt-1 rounded-xl border border-foreground/20 bg-background/50 focus:border-turquoise outline-none" />
-            </div>
-            <div>
-              <label className="text-sm font-semibold ml-1">Telefon Numaranız</label>
-              <input type="tel" className="w-full h-12 px-4 mt-1 rounded-xl border border-foreground/20 bg-background/50 focus:border-turquoise outline-none" />
-            </div>
-            <div>
-              <label className="text-sm font-semibold ml-1">Mesajınız</label>
-              <textarea className="w-full p-4 mt-1 rounded-xl border border-foreground/20 bg-background/50 focus:border-turquoise outline-none" rows={4}></textarea>
-            </div>
-            <Button size="lg" className="w-full">Mesajı Gönder</Button>
-          </form>
-        </div>
+        <ContactForm />
       </div>
     </div>
   );

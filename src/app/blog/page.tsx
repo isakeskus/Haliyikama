@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { BookOpen } from "lucide-react";
 
 export const metadata = {
   title: "Blog & Faydalı Bilgiler",
   description: "Koltuk temizliği, leke çıkarma yöntemleri ve ev hijyeni hakkında faydalı bilgiler içeren blog yazılarımız.",
+  alternates: { canonical: "/blog" },
 };
 
 const blogPosts = [

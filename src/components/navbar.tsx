@@ -5,8 +5,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X, Phone, MessageCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/services";
 
 const navLinks = [
   { href: "/", label: "Anasayfa" },
@@ -43,10 +44,15 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
+          <Button variant="whatsapp" size="icon" className="gap-2" asChild>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp'tan yazın">
+              <MessageCircle size={20} />
+            </a>
+          </Button>
           <Button variant="primary" className="gap-2" asChild>
-            <a href="tel:+905523135463">
+            <a href={`tel:${PHONE_TEL}`}>
               <Phone size={18} />
-              0552 313 54 63
+              {PHONE_DISPLAY}
             </a>
           </Button>
         </nav>
@@ -83,12 +89,20 @@ export function Navbar() {
                   {link.label}
                 </Link>
               ))}
-              <Button variant="primary" className="w-full gap-2 mt-4" asChild>
-                <a href="tel:+905523135463">
-                  <Phone size={18} />
-                  0552 313 54 63
-                </a>
-              </Button>
+              <div className="flex gap-3 mt-4">
+                <Button variant="whatsapp" className="flex-1 gap-2" asChild>
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                    <MessageCircle size={18} />
+                    WhatsApp
+                  </a>
+                </Button>
+                <Button variant="primary" className="flex-1 gap-2" asChild>
+                  <a href={`tel:${PHONE_TEL}`}>
+                    <Phone size={18} />
+                    Ara
+                  </a>
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}

@@ -2,15 +2,18 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { 
-  Phone, MessageCircle, CheckCircle2, Droplets, 
-  Sparkles, Wind, ShieldCheck, MapPin, Star,
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Phone, MessageCircle, CheckCircle2, Droplets,
+  Sparkles, Wind, ShieldCheck, Star,
   ChevronDown, ChevronUp
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { districts } from "@/lib/districts";
+import { PHONE_TEL, WHATSAPP_URL } from "@/lib/services";
+import { JsonLd } from "@/components/json-ld";
 
 // --- Data ---
 const services = [
@@ -57,15 +60,20 @@ function HeroSection() {
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6">
-            Bursa'nın Profesyonel <br/><span className="text-turquoise">Koltuk Yıkama</span> Hizmeti
+            Bursa&apos;nın Profesyonel <br/><span className="text-turquoise">Koltuk Yıkama</span> Hizmeti
           </h1>
           <p className="text-lg lg:text-xl text-foreground/80 mb-8 max-w-lg">
             Evde yerinde profesyonel koltuk, yatak, sandalye ve araç koltuğu temizliği. Aynı gün servis ile derinlemesine hijyen.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button size="lg" className="text-lg gap-2" asChild>
-              <a href="tel:+905523135463">
+              <a href={`tel:${PHONE_TEL}`}>
                 <Phone size={24} /> Hemen Ara
+              </a>
+            </Button>
+            <Button size="lg" variant="whatsapp" className="text-lg gap-2" asChild>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
+                <MessageCircle size={24} /> WhatsApp
               </a>
             </Button>
           </div>
@@ -119,6 +127,49 @@ function TrustSection() {
         </div>
       </div>
     </div>
+  );
+}
+
+function GallerySection() {
+  return (
+    <section className="py-16 md:py-24 bg-slate-50 dark:bg-slate-900/50 overflow-hidden">
+      <div className="container mx-auto px-4">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">İşimizden Kareler</h2>
+          <p className="text-foreground/70 text-lg">Profesyonel ekipmanlarımız ve titiz çalışma anlayışımızla yerinde temizlik.</p>
+        </div>
+        <div className="grid grid-cols-2 gap-4 md:gap-6 max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative h-56 sm:h-72 md:h-96 rounded-3xl overflow-hidden shadow-xl border border-white/30 mt-8"
+          >
+            <Image
+              src="/images/hero.jpg"
+              alt="Evde profesyonel koltuk yıkama hizmeti"
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="relative h-56 sm:h-72 md:h-96 rounded-3xl overflow-hidden shadow-xl border border-white/30"
+          >
+            <Image
+              src="/images/detail.jpg"
+              alt="Buharlı koltuk yıkama ve leke çıkarma detayı"
+              fill
+              className="object-cover hover:scale-105 transition-transform duration-500"
+            />
+          </motion.div>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -232,7 +283,7 @@ function QuoteFormSection() {
   return (
     <section className="py-16 md:py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-navy -z-20" />
-      <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(255,255,255,0.15)_1px,transparent_1px)] bg-[length:24px_24px] opacity-30 -z-10" />
       
       <div className="container mx-auto px-4">
         <div className="max-w-4xl mx-auto glass-card rounded-3xl p-8 lg:p-12 border-0 shadow-2xl relative overflow-hidden text-center">
@@ -244,12 +295,20 @@ function QuoteFormSection() {
             Hizmetlerimiz hakkında detaylı bilgi ve evinize özel fiyat teklifi almak için bizi saniyeler içinde arayabilirsiniz.
           </p>
           
-          <Button size="lg" className="text-xl h-16 px-8 rounded-full shadow-[0_0_40px_rgba(0,184,217,0.4)] hover:shadow-[0_0_60px_rgba(0,184,217,0.6)] gap-3" asChild>
-            <a href="tel:+905523135463" className="flex items-center gap-3">
-              <Phone size={32} />
-              Şimdi Bizi Arayın
-            </a>
-          </Button>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="text-xl h-16 px-8 rounded-full shadow-[0_0_40px_rgba(0,184,217,0.4)] hover:shadow-[0_0_60px_rgba(0,184,217,0.6)] gap-3" asChild>
+              <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-3">
+                <Phone size={28} />
+                Şimdi Bizi Arayın
+              </a>
+            </Button>
+            <Button size="lg" variant="whatsapp" className="text-xl h-16 px-8 rounded-full gap-3" asChild>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                <MessageCircle size={28} />
+                WhatsApp
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -293,34 +352,46 @@ function FAQSection() {
 
 
 function ServiceAreasSection() {
-  const districts = ["Nilüfer", "Osmangazi", "Yıldırım", "İnegöl", "Gemlik", "Mudanya"];
   return (
     <section className="py-16 bg-slate-50 dark:bg-slate-900/50">
       <div className="container mx-auto px-4 text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-6">Hizmet Bölgelerimiz</h2>
         <p className="text-foreground/70 max-w-2xl mx-auto mb-8">
-          Bursa'nın tüm ilçelerine gezici servisimiz ile profesyonel yerinde koltuk ve yatak yıkama hizmeti sunuyoruz.
+          Bursa&apos;nın tüm ilçelerine gezici servisimiz ile profesyonel yerinde koltuk ve yatak yıkama hizmeti sunuyoruz.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          {districts.map(d => (
-            <span key={d} className="px-4 py-2 rounded-full border border-turquoise/30 bg-turquoise/5 text-turquoise font-medium text-sm md:text-base">
-              {d} Koltuk Yıkama
-            </span>
+          {districts.map((d) => (
+            <Link
+              key={d.slug}
+              href={`/${d.slug}`}
+              className="px-4 py-2 rounded-full border border-turquoise/30 bg-turquoise/5 text-turquoise font-medium text-sm md:text-base hover:bg-turquoise/10 transition-colors"
+            >
+              {d.name} Koltuk Yıkama
+            </Link>
           ))}
-          <span className="px-4 py-2 rounded-full border border-foreground/10 bg-background font-medium text-sm md:text-base">
-            + Bursa'nın Diğer Tüm İlçeleri
-          </span>
         </div>
       </div>
     </section>
   );
 }
 
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.q,
+    acceptedAnswer: { "@type": "Answer", text: faq.a },
+  })),
+};
+
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
+      <JsonLd data={faqSchema} />
       <HeroSection />
       <TrustSection />
+      <GallerySection />
       <ServicesSection />
       <StepsSection />
       <WhyUsSection />
@@ -331,7 +402,7 @@ export default function Home() {
       {/* Mobile Sticky CTA */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 p-4 bg-background/80 backdrop-blur-md border-t border-foreground/10 z-40">
         <Button size="lg" className="w-full shadow-2xl text-lg font-bold gap-2" asChild>
-          <a href="tel:+905523135463">
+          <a href={`tel:${PHONE_TEL}`}>
             <Phone size={24} /> Hemen Ara
           </a>
         </Button>

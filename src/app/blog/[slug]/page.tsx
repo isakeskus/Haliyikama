@@ -1,7 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { MessageCircle, ArrowLeft } from "lucide-react";
+import { Phone, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PHONE_TEL } from "@/lib/services";
 
 // Bu veri tabanından gelecek veriyi simüle ediyor
 const blogData: Record<string, { title: string, content: string, date: string }> = {
@@ -27,17 +28,24 @@ const blogData: Record<string, { title: string, content: string, date: string }>
   }
 };
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = blogData[params.slug];
+export function generateStaticParams() {
+  return Object.keys(blogData).map((slug) => ({ slug }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = blogData[slug];
   if (!post) return { title: "Yazı Bulunamadı" };
   return {
     title: `${post.title} | Bursa Koltuk Yıkama Blog`,
     description: post.content.substring(0, 150) + "...",
+    alternates: { canonical: `/blog/${slug}` },
   };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogData[params.slug];
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = blogData[slug];
 
   if (!post) {
     notFound();
@@ -46,30 +54,30 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   return (
     <div className="pt-28 pb-16 lg:pt-40 lg:pb-32 container mx-auto px-4 max-w-3xl">
       <Link href="/blog" className="inline-flex items-center text-turquoise hover:underline mb-8 font-medium">
-        <ArrowLeft size={16} className="mr-2" /> Blog'a Dön
+        <ArrowLeft size={16} className="mr-2" /> Blog&apos;a Dön
       </Link>
-      
+
       <article className="glass-card rounded-3xl p-8 lg:p-12 shadow-2xl relative overflow-hidden">
         {/* Decorative glow */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-turquoise rounded-full blur-[100px] opacity-10 pointer-events-none" />
-        
+
         <header className="mb-10">
           <p className="text-turquoise font-medium mb-4">{post.date}</p>
           <h1 className="text-3xl md:text-5xl font-bold text-navy dark:text-white leading-tight mb-6">
             {post.title}
           </h1>
         </header>
-        
+
         <div className="prose prose-lg dark:prose-invert prose-headings:text-navy dark:prose-headings:text-white prose-p:text-foreground/80 max-w-none mb-12">
           <p className="leading-relaxed text-lg">{post.content}</p>
         </div>
-        
+
         <div className="border-t border-foreground/10 pt-8 mt-12">
           <div className="bg-navy rounded-2xl p-6 text-center text-white">
             <h3 className="text-xl font-bold mb-2">Koltuklarınız Profesyonel Ellere Emanet!</h3>
-            <p className="text-white/80 mb-6">Bursa'nın tüm ilçelerine aynı gün ücretsiz servis imkanı.</p>
+            <p className="text-white/80 mb-6">Bursa&apos;nın tüm ilçelerine aynı gün ücretsiz servis imkanı.</p>
             <Button size="lg" className="gap-2" asChild>
-              <a href="tel:+905523135463">
+              <a href={`tel:${PHONE_TEL}`}>
                 <Phone size={20} /> Hemen Fiyat Al
               </a>
             </Button>
