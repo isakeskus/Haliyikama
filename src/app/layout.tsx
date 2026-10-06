@@ -1,13 +1,27 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
+import { Plus_Jakarta_Sans, Sora } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
 import { districts } from "@/lib/districts";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { JsonLd } from "@/components/json-ld";
+import { FloatingWhatsApp } from "@/components/floating-whatsapp";
+import { MobileCtaBar } from "@/components/mobile-cta-bar";
+import { Aurora } from "@/components/aurora";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { Providers } from "@/components/providers";
 
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+// latin-ext is required for Turkish glyphs (ş, ğ, İ).
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-jakarta",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+});
+
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
 });
 
 const districtKeywords = districts.map((d) => `${d.name} Koltuk Yıkama`);
@@ -51,13 +65,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0F3D7A",
+  themeColor: "#030814",
+  colorScheme: "dark",
 };
-
-import { Navbar } from "@/components/navbar";
-import { Footer } from "@/components/footer";
-import { JsonLd } from "@/components/json-ld";
-import { FloatingWhatsApp } from "@/components/floating-whatsapp";
 
 export default function RootLayout({
   children,
@@ -93,15 +103,18 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="tr" suppressHydrationWarning className={`${poppins.variable} h-full scroll-smooth`}>
-      <body suppressHydrationWarning className="min-h-full flex flex-col font-sans bg-background text-foreground antialiased selection:bg-turquoise selection:text-white">
-        <ThemeProvider attribute="data-theme" defaultTheme="system" enableSystem>
+    <html lang="tr" className={`${jakarta.variable} ${sora.variable}`}>
+      <body className="min-h-svh bg-background font-sans text-foreground antialiased">
+        <Providers>
+          <Aurora />
+          <ScrollProgress />
           <JsonLd data={localBusinessSchema} />
           <Navbar />
-          <main className="flex-grow">{children}</main>
+          <main>{children}</main>
           <Footer />
           <FloatingWhatsApp />
-        </ThemeProvider>
+          <MobileCtaBar />
+        </Providers>
       </body>
     </html>
   );

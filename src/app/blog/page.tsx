@@ -1,6 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { ArrowUpRight } from "lucide-react";
+import { PageTransition } from "@/components/page-transition";
+import { PageHero } from "@/components/page-hero";
+import { TiltCard } from "@/components/ui/tilt-card";
+import { Reveal } from "@/components/ui/reveal";
+import { blogPosts } from "@/lib/blog";
 
 export const metadata = {
   title: "Blog & Faydalı Bilgiler",
@@ -8,46 +13,50 @@ export const metadata = {
   alternates: { canonical: "/blog" },
 };
 
-const blogPosts = [
-  { slug: "koltuk-kac-ayda-bir-yikanmali", title: "Koltuk Kaç Ayda Bir Yıkanmalı?", excerpt: "Evimizdeki koltukların görünmeyen tehlikeleri ve ideal yıkama periyotları hakkında bilmeniz gereken her şey." },
-  { slug: "evde-koltuk-temizligi", title: "Evde Koltuk Temizliği Nasıl Yapılır?", excerpt: "Profesyonel yardım almadan önce evde kendi imkanlarınızla yapabileceğiniz güvenli koltuk silme yöntemleri." },
-  { slug: "buharli-koltuk-yikama", title: "Buharlı Koltuk Yıkama Nedir?", excerpt: "Buhar gücüyle derinlemesine temizliğin avantajları ve neden tercih edilmesi gerektiği." },
-  { slug: "en-zor-lekeler", title: "En Zor Lekeler Nasıl Çıkar?", excerpt: "Çay, kahve, tükenmez kalem gibi inatçı lekelerle başa çıkmanın pratik ve etkili yolları." },
-];
-
 export default function BlogPage() {
   return (
-    <div className="pt-32 pb-24 container mx-auto px-4 max-w-6xl">
-      <div className="text-center mb-16">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-navy dark:text-white">Blog & Faydalı Bilgiler</h1>
-        <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
-          Temizlik, hijyen ve leke çıkarma sırları hakkında uzman ekibimiz tarafından hazırlanan yazılar.
-        </p>
-      </div>
+    <PageTransition>
+      <PageHero
+        kicker="Blog"
+        title="Blog &"
+        accent="Faydalı Bilgiler"
+        description="Temizlik, hijyen ve leke çıkarma sırları hakkında uzman ekibimiz tarafından hazırlanan yazılar."
+      />
 
-      <div className="grid md:grid-cols-2 gap-8">
-        {blogPosts.map((post) => (
-          <Link href={`/blog/${post.slug}`} key={post.slug} className="group block">
-            <Card className="h-full group-hover:border-turquoise/50 transition-colors">
-              <div className="h-48 relative rounded-t-3xl overflow-hidden border-b border-foreground/10">
-                <Image 
-                  src="/images/detail.jpg" 
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-              </div>
-              <CardHeader>
-                <CardTitle className="text-2xl group-hover:text-turquoise transition-colors">{post.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-foreground/70">{post.excerpt}</p>
-                <span className="inline-block mt-4 text-turquoise font-semibold">Devamını Oku &rarr;</span>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
-    </div>
+      <section className="pb-24 md:pb-32">
+        <div className="container mx-auto grid max-w-6xl gap-6 px-4 md:grid-cols-2">
+          {blogPosts.map((post, i) => (
+            <Reveal key={post.slug} delay={(i % 2) * 0.1}>
+              <Link href={`/blog/${post.slug}`} className="group block h-full">
+                <TiltCard className="flex h-full flex-col overflow-hidden" max={4}>
+                  <div className="relative h-56 overflow-hidden">
+                    <Image
+                      src={post.image}
+                      alt={post.title}
+                      fill
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
+                      style={{ objectPosition: i % 2 ? "70% 50%" : "30% 50%" }}
+                    />
+                    <div className="absolute inset-0 bg-linear-to-t from-ink via-ink/20 to-transparent" aria-hidden="true" />
+                    <span className="absolute left-5 top-5 rounded-full border border-white/15 bg-ink/60 px-3 py-1 text-[11px] font-medium uppercase tracking-[0.15em] text-aqua backdrop-blur">
+                      {post.date}
+                    </span>
+                  </div>
+                  <div className="flex grow flex-col p-7">
+                    <h2 className="text-2xl font-semibold leading-snug text-white transition-colors group-hover:text-aqua">{post.title}</h2>
+                    <p className="mt-3 grow text-white/60">{post.excerpt}</p>
+                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-aqua">
+                      Devamını Oku
+                      <ArrowUpRight size={16} className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </TiltCard>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+    </PageTransition>
   );
 }

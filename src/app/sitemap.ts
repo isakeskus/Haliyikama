@@ -1,14 +1,10 @@
 import type { MetadataRoute } from "next";
 import { districts } from "@/lib/districts";
+import { blogPosts } from "@/lib/blog";
 
 const BASE_URL = "https://bursakoltukyikama.com";
 
-const blogSlugs = [
-  "koltuk-kac-ayda-bir-yikanmali",
-  "evde-koltuk-temizligi",
-  "buharli-koltuk-yikama",
-  "en-zor-lekeler",
-];
+const blogSlugs = blogPosts.map((p) => p.slug);
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes: MetadataRoute.Sitemap = [

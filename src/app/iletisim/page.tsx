@@ -1,6 +1,9 @@
 import { Metadata } from "next";
-import { Phone, MapPin, MessageCircle, Clock } from "lucide-react";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { PageTransition } from "@/components/page-transition";
+import { PageHero } from "@/components/page-hero";
 import { ContactForm } from "@/components/contact-form";
+import { Reveal } from "@/components/ui/reveal";
 import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/services";
 
 export const metadata: Metadata = {
@@ -9,64 +12,71 @@ export const metadata: Metadata = {
   alternates: { canonical: "/iletisim" },
 };
 
+const CARD = "glass flex items-start gap-5 rounded-3xl p-6";
+const ICON = "grid size-14 shrink-0 place-items-center rounded-2xl bg-linear-to-b from-turquoise/25 to-turquoise/5 text-aqua ring-1 ring-inset ring-white/10";
+
 export default function ContactPage() {
   return (
-    <div className="pt-32 pb-24 container mx-auto px-4">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-navy dark:text-white">İletişim</h1>
-        <p className="text-lg text-foreground/70">
-          Randevu almak veya hizmetlerimiz hakkında detaylı bilgi edinmek için bize aşağıdaki kanallardan ulaşabilirsiniz.
-        </p>
-      </div>
+    <PageTransition>
+      <PageHero
+        kicker="İletişim"
+        title="Bizimle"
+        accent="İletişime Geçin"
+        description="Randevu almak veya hizmetlerimiz hakkında detaylı bilgi edinmek için bize aşağıdaki kanallardan ulaşabilirsiniz."
+      />
 
-      <div className="grid lg:grid-cols-2 gap-12 items-start max-w-5xl mx-auto">
-        <div className="space-y-8">
-          <div className="flex items-start gap-4">
-            <div className="p-4 bg-turquoise/10 rounded-2xl text-turquoise">
-              <Phone size={28} />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-1">Telefon</h3>
-              <p className="text-foreground/70 mb-2">Hızlı randevu ve teklif için arayın.</p>
-              <a href={`tel:${PHONE_TEL}`} className="text-xl font-semibold hover:text-turquoise transition-colors block">{PHONE_DISPLAY}</a>
-            </div>
+      <section className="pb-24 md:pb-32">
+        <div className="container mx-auto grid max-w-5xl items-start gap-6 px-4 lg:grid-cols-2 lg:gap-8">
+          <div className="space-y-4">
+            <Reveal>
+              <a href={`tel:${PHONE_TEL}`} className={`${CARD} transition-colors hover:bg-white/[0.08]`}>
+                <span className={ICON}><Phone size={26} /></span>
+                <span>
+                  <span className="block text-lg font-semibold text-white">Telefon</span>
+                  <span className="mt-1 block text-sm text-white/50">Hızlı randevu ve teklif için arayın.</span>
+                  <span className="mt-2 block text-xl font-semibold text-aqua">{PHONE_DISPLAY}</span>
+                </span>
+              </a>
+            </Reveal>
+
+            <Reveal delay={0.07}>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={`${CARD} transition-colors hover:bg-white/[0.08]`}>
+                <span className={ICON}><MessageCircle size={26} /></span>
+                <span>
+                  <span className="block text-lg font-semibold text-white">WhatsApp</span>
+                  <span className="mt-1 block text-sm text-white/50">Yazışarak hızlıca fiyat teklifi alın.</span>
+                  <span className="mt-2 block text-xl font-semibold text-aqua">WhatsApp&apos;tan Yazın</span>
+                </span>
+              </a>
+            </Reveal>
+
+            <Reveal delay={0.14}>
+              <div className={CARD}>
+                <span className={ICON}><MapPin size={26} /></span>
+                <span>
+                  <span className="block text-lg font-semibold text-white">Merkez Ofis</span>
+                  <span className="mt-1 block text-white/70">Ahmet Paşa mahallesi fevziçakmak caddesi 47 numara, Bursa</span>
+                  <span className="mt-2 block text-sm text-white/40">*Bursa&apos;nın tüm ilçelerine gezici servis ağımız mevcuttur.</span>
+                </span>
+              </div>
+            </Reveal>
+
+            <Reveal delay={0.21}>
+              <div className={CARD}>
+                <span className={ICON}><Clock size={26} /></span>
+                <span>
+                  <span className="block text-lg font-semibold text-white">Çalışma Saatleri</span>
+                  <span className="mt-1 block text-white/70">Pazartesi - Pazar: 08:00 - 22:00</span>
+                </span>
+              </div>
+            </Reveal>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="p-4 bg-turquoise/10 rounded-2xl text-turquoise">
-              <MessageCircle size={28} />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-1">WhatsApp</h3>
-              <p className="text-foreground/70 mb-2">Yazışarak hızlıca fiyat teklifi alın.</p>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-xl font-semibold hover:text-turquoise transition-colors block">WhatsApp&apos;tan Yazın</a>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="p-4 bg-turquoise/10 rounded-2xl text-turquoise">
-              <MapPin size={28} />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-1">Merkez Ofis</h3>
-              <p className="text-foreground/70">Ahmet Paşa mahallesi fevziçakmak caddesi 47 numara, Bursa</p>
-              <p className="text-sm text-foreground/50 mt-1">*Bursa&apos;nın tüm ilçelerine gezici servis ağımız mevcuttur.</p>
-            </div>
-          </div>
-
-          <div className="flex items-start gap-4">
-            <div className="p-4 bg-turquoise/10 rounded-2xl text-turquoise">
-              <Clock size={28} />
-            </div>
-            <div>
-              <h3 className="text-xl font-bold mb-1">Çalışma Saatleri</h3>
-              <p className="text-foreground/70">Pazartesi - Pazar: 08:00 - 22:00</p>
-            </div>
-          </div>
+          <Reveal delay={0.1}>
+            <ContactForm />
+          </Reveal>
         </div>
-
-        <ContactForm />
-      </div>
-    </div>
+      </section>
+    </PageTransition>
   );
 }

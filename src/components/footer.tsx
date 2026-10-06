@@ -1,75 +1,91 @@
 import Link from "next/link";
-import { Phone, MapPin, Clock, MessageCircle } from "lucide-react";
-import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from "@/lib/services";
+import { Clock, MapPin, MessageCircle, Phone } from "lucide-react";
+import { PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL, serviceLinks } from "@/lib/services";
 import { districts } from "@/lib/districts";
 
-const featuredDistricts = districts.slice(0, 6);
+const featuredDistricts = districts.slice(0, 8);
 
 export function Footer() {
   return (
-    <footer className="bg-navy text-white pt-16 pb-8 rounded-t-3xl mt-12 shadow-2xl">
-      <div className="container mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8 lg:gap-12 mb-12">
-        {/* Brand & Description */}
-        <div>
-          <h2 className="text-3xl font-bold mb-4 tracking-tight">
-            Bursa<span className="text-turquoise">Yıkama</span>
-          </h2>
-          <p className="text-white/80 mb-6">
-            Bursa&apos;nın her noktasına aynı gün yerinde profesyonel koltuk, yatak ve araç koltuğu temizliği hizmeti sunuyoruz.
-          </p>
+    <footer className="relative mt-24 overflow-hidden pb-28 pt-4 md:pb-10">
+      <div className="container mx-auto px-4">
+        <div className="glass rounded-[2rem] p-8 md:p-12">
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-12">
+            <div>
+              <Link href="/" className="font-display text-3xl font-semibold tracking-tight text-white">
+                Bursa<span className="text-turquoise">Yıkama</span>
+              </Link>
+              <p className="mt-4 text-sm leading-relaxed text-white/60">
+                Bursa&apos;nın her noktasına aynı gün yerinde profesyonel koltuk, yatak ve araç koltuğu temizliği hizmeti sunuyoruz.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-aqua">İletişim</h3>
+              <ul className="space-y-4 text-sm text-white/70">
+                <li className="flex items-start gap-3">
+                  <Phone className="mt-0.5 shrink-0 text-turquoise" size={18} />
+                  <a href={`tel:${PHONE_TEL}`} className="transition-colors hover:text-white">{PHONE_DISPLAY}</a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MessageCircle className="mt-0.5 shrink-0 text-turquoise" size={18} />
+                  <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">
+                    WhatsApp&apos;tan Yazın
+                  </a>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="mt-0.5 shrink-0 text-turquoise" size={18} />
+                  <span>Ahmet Paşa mahallesi fevziçakmak caddesi 47 numara, Bursa</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Clock className="mt-0.5 shrink-0 text-turquoise" size={18} />
+                  <span>Her Gün: 08:00 - 22:00</span>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-aqua">Hizmetler</h3>
+              <ul className="space-y-3 text-sm text-white/70">
+                {serviceLinks.map((s) => (
+                  <li key={s.href}>
+                    <Link href={s.href} className="transition-colors hover:text-white">{s.title}</Link>
+                  </li>
+                ))}
+                <li>
+                  <Link href="/iletisim" className="transition-colors hover:text-white">İletişim &amp; Randevu</Link>
+                </li>
+                <li>
+                  <Link href="/blog" className="transition-colors hover:text-white">Blog</Link>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-aqua">Hizmet Bölgeleri</h3>
+              <ul className="space-y-3 text-sm text-white/70">
+                {featuredDistricts.map((d) => (
+                  <li key={d.slug}>
+                    <Link href={`/${d.slug}`} className="transition-colors hover:text-white">
+                      {d.name} Koltuk Yıkama
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         </div>
 
-        {/* Contact Info */}
-        <div>
-          <h3 className="text-xl font-semibold mb-6">İletişim</h3>
-          <ul className="space-y-4 text-white/80">
-            <li className="flex items-start space-x-3">
-              <Phone className="text-turquoise shrink-0 mt-1" size={20} />
-              <a href={`tel:${PHONE_TEL}`} className="hover:text-turquoise transition-colors block">{PHONE_DISPLAY}</a>
-            </li>
-            <li className="flex items-start space-x-3">
-              <MessageCircle className="text-turquoise shrink-0 mt-1" size={20} />
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="hover:text-turquoise transition-colors block">WhatsApp&apos;tan Yazın</a>
-            </li>
-            <li className="flex items-start space-x-3">
-              <MapPin className="text-turquoise shrink-0 mt-1" size={20} />
-              <span>Ahmet Paşa mahallesi fevziçakmak caddesi 47 numara, Bursa</span>
-            </li>
-            <li className="flex items-start space-x-3">
-              <Clock className="text-turquoise shrink-0 mt-1" size={20} />
-              <span>Her Gün: 08:00 - 22:00</span>
-            </li>
-          </ul>
-        </div>
+        <p
+          aria-hidden="true"
+          className="pointer-events-none mt-10 select-none text-center font-display text-[17vw] font-bold leading-none tracking-tighter text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.09)] md:mt-14"
+        >
+          BursaYıkama
+        </p>
 
-        {/* Links */}
-        <div>
-          <h3 className="text-xl font-semibold mb-6">Hızlı Bağlantılar</h3>
-          <ul className="space-y-2 text-white/80">
-            <li><Link href="/koltuk-yikama" className="hover:text-turquoise transition-colors">Koltuk Yıkama</Link></li>
-            <li><Link href="/yatak-yikama" className="hover:text-turquoise transition-colors">Yatak Yıkama</Link></li>
-            <li><Link href="/sandalye-yikama" className="hover:text-turquoise transition-colors">Sandalye Yıkama</Link></li>
-            <li><Link href="/arac-koltugu-yikama" className="hover:text-turquoise transition-colors">Araç Koltuğu Yıkama</Link></li>
-            <li><Link href="/iletisim" className="hover:text-turquoise transition-colors">İletişim & Randevu</Link></li>
-          </ul>
-        </div>
-
-        {/* District Links */}
-        <div>
-          <h3 className="text-xl font-semibold mb-6">Hizmet Bölgeleri</h3>
-          <ul className="space-y-2 text-white/80">
-            {featuredDistricts.map((d) => (
-              <li key={d.slug}>
-                <Link href={`/${d.slug}`} className="hover:text-turquoise transition-colors">
-                  {d.name} Koltuk Yıkama
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="container mx-auto px-4 pt-8 border-t border-white/10 text-center text-white/60 text-sm">
-        <p>&copy; {new Date().getFullYear()} Bursa Koltuk Yıkama. Tüm Hakları Saklıdır.</p>
+        <p className="mt-6 text-center text-xs text-white/40">
+          &copy; {new Date().getFullYear()} Bursa Koltuk Yıkama. Tüm Hakları Saklıdır.
+        </p>
       </div>
     </footer>
   );
